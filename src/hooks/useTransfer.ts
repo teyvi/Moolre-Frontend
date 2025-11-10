@@ -17,8 +17,7 @@ export const useTransfer = () => {
     },
     onSuccess: (data) => {
       console.log("Transfer successful:", data);
-      // Log if this is actually a backend error disguised as success
-      if (data.status === 0 || data.code?.includes("AIN")) {
+       if (data.status === 0 || data.code?.includes("AIN")) {
         console.error(
           "Transfer succeeded but backend returned error status:",
           data
