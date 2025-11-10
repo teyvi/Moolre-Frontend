@@ -250,8 +250,7 @@ const PaymentApp = () => {
         ],
       };
 
-      console.log('SMS payload:', payload); // Debug log
-      const result = await smsMutation.mutateAsync(payload);
+       const result = await smsMutation.mutateAsync(payload);
 
       // Check if SMS was sent successfully
       if (result.status === 1 || result.status === "1") {
@@ -270,8 +269,7 @@ const PaymentApp = () => {
     }
   };
 
-  console.log('validation data', validatedAccount)
-  // Home Screen
+   // Home Screen
   if (currentScreen === "home") {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-8 flex items-center justify-center">
@@ -470,8 +468,7 @@ const PaymentApp = () => {
   // Summary Screen
   if (currentScreen === "summary") {
     // Debug log to see what data we have
-    console.log('Summary screen - validatedAccount:', validatedAccount);
-    
+     
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-8 flex items-center justify-center">
         <Card className="w-full max-w-md">
