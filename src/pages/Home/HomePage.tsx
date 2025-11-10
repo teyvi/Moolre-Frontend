@@ -65,6 +65,8 @@ const PaymentApp = () => {
     message: "",
     senderid: "Moolre", // Default sender ID
   });
+
+
   const [smsErrors, setSmsErrors] = useState<Partial<SMSFormData>>({});
   const [smsError, setSmsError] = useState<string>("");
 
@@ -121,7 +123,7 @@ const PaymentApp = () => {
 
         // Prepare validation payload
         const validationPayload = {
-          type: 1, // Mobile money type
+          type: 1,
           receiver: formData.number,
           channel: getChannelFromNetwork(formData.network),
           currency: "GHS",
@@ -130,13 +132,11 @@ const PaymentApp = () => {
 
         // Show validation screen while validating
         setCurrentScreen("validation");
-
         // Call name validation API
         const validationResult = await nameValidationMutation.mutateAsync(
           validationPayload
         );
-        console.log('Validation result:', validationResult)
-
+ 
         // Check for successful validation - backend returns status: 1 for success
         if (validationResult.status === 1 || validationResult.status === "1") {
           // Extract account name from the response data
@@ -187,18 +187,16 @@ const PaymentApp = () => {
         amount: parseFloat(formData.amount),
         externalref: generateExternalRef(),
         reference: formData.description,
-        accountnumber: import.meta.env.VITE_ACCOUNTNUMBER, // Use proper account number from env
+        accountnumber: import.meta.env.VITE_ACCOUNTNUMBER,
       };
 
-      console.log('Send money payload:', payload); // Debug log
-      const result = await transferMutation.mutateAsync(payload);
+       const result = await transferMutation.mutateAsync(payload);
       
       // Check if the transfer was actually successful
       if (result.status === 1 || result.status === "1") {
         setCurrentScreen("success");
       } else {
-        // Backend returned an error status
-        setTransferError(
+         setTransferError(
           result.message || `Transfer failed with code: ${result.code || 'unknown'}`
         );
         setCurrentScreen("error");

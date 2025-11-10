@@ -41,8 +41,7 @@ export const useSendSMS = () => {
     },
     onSuccess: (data) => {
       console.log('SMS sent successfully:', data);
-      // Log if this is actually a backend error disguised as success
-      if (data.status === 0 || data.status === "0") {
+       if (data.status === 0 || data.status === "0") {
         console.error('SMS succeeded but backend returned error status:', data);
       }
     }
